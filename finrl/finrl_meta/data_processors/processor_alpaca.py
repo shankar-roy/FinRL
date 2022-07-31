@@ -38,7 +38,9 @@ class AlpacaProcessor:
                 ).df
                 barset["tic"] = tic
                 barset = barset.reset_index()
-                data_df = data_df.append(barset)
+                # Following line gives - "FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead."
+                #data_df = data_df.append(barset)
+                data_df = pd.concat([data_df, barset])
             print(("Data before ") + end_time + " is successfully fetched")
             # print(data_df.head())
             date = date + pd.Timedelta(days=1)

@@ -151,9 +151,10 @@ class FeatureEngineer:
                     temp_indicator["date"] = df[df.tic == unique_ticker[i]][
                         "date"
                     ].to_list()
-                    indicator_df = indicator_df.append(
-                        temp_indicator, ignore_index=True
-                    )
+                    #indicator_df = indicator_df.append(
+                    #    temp_indicator, ignore_index=True
+                    #)
+                    indicator_df = pd.concat([indicator_df, temp_indicator], ignore_index=True)
                 except Exception as e:
                     print(e)
             df = df.merge(
@@ -224,14 +225,14 @@ class FeatureEngineer:
         count = 0
         for i in range(start, len(unique_date)):
             current_price = df_price_pivot[df_price_pivot.index == unique_date[i]]
-            # use one year rolling window to calcualte covariance
+            # use one year rolling window to calculate covariance
             hist_price = df_price_pivot[
                 (df_price_pivot.index < unique_date[i])
                 & (df_price_pivot.index >= unique_date[i - 252])
             ]
             # Drop tickers which has number missing values more than the "oldest" ticker
             filtered_hist_price = hist_price.iloc[
-                hist_price.isna().sum().min() :
+                hist_price.isna().sum().min():
             ].dropna(axis=1)
 
             cov_temp = filtered_hist_price.cov()
