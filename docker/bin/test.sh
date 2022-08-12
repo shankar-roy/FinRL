@@ -1,3 +1,6 @@
 #!/bin/bash
 
-docker run --rm finrl python3 -m pytest . -v
+
+docker run \
+    --rm \
+    -v "${PWD}":/home finrl python3 -m unittest discover

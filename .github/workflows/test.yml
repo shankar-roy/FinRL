@@ -1,19 +1,25 @@
 name: Run Tests!
 
-on:
-  schedule:
-    - 0 6 * * *
+# Run this workflow every time a new commit pushed to your repository
+on: [push, pull_request]
 
 jobs:
-  tests:
-    name: run pytest inside sb3 docker container
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  unittest:
+    # Name the Job
+    name: Test the code
+    # Set the type of machine to run on
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: build container # use docker buildkit for caching?
+      # Runs the Super-Linter action
+      - name: Build Container
         run: bash docker/bin/build_container.sh
-
+      
       - name: Run Tests
         run: bash docker/bin/test.sh
