@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Pulled from https://gist.github.com/robintibor/81943cc4629fff58e5cd7f8c4ed81817 
+Pulled from https://gist.github.com/robintibor/81943cc4629fff58e5cd7f8c4ed81817
 Note!!: Changed mlogic to use keep_output flag instead, see Code.
 And changed name to nb_drop_output.py
 Original from https://gist.github.com/pbugnion/ea2797393033b54674af , including comments there

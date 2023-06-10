@@ -194,6 +194,7 @@ class FeatureEngineer:
         vix.columns = ["date", "vix"]
 
         df = df.merge(vix, on="date")
+        # df = pd.concat([df, vix])
         df = df.sort_values(["date", "tic"]).reset_index(drop=True)
         return df
 
@@ -260,3 +261,5 @@ class FeatureEngineer:
             {"date": df_price_pivot.index, "turbulence": turbulence_index}
         )
         return turbulence_index
+
+#%%
